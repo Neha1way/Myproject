@@ -21,6 +21,7 @@ def test_setup():
     submit = driver.find_element_by_xpath("/html/body/div[1]/main/div/div/div[1]/div[2]/form/div[2]/button")
     submit.click()
     time.sleep(5)
+    print()
 
 # Get title of each module
 # def test_title(test_setup):
