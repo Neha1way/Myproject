@@ -6,11 +6,11 @@ import pytest
 import pyautogui
 from fpdf import FPDF
 
-global driver
+#global driver
 @pytest.fixture()
 def test_setup():
     global driver
-    driver=webdriver.Chrome(executable_path="E:\MyFirstProject\Chrome\chromedriver.exe")
+    driver = webdriver.Chrome(executable_path="C:/BIDS/beneficienttest/Beneficient/Chrome/chromedriver.exe")
     driver.maximize_window()
     driver.implicitly_wait(20)
     email = "neha@1wayit.com"
@@ -35,32 +35,41 @@ def test_setup():
 #Clicked on each module of side bar and taking screenshot of each module
 def test_clickeach_module(test_setup):
     j=1
-    for i in range(1,17):
-        print (i)
+    for i in range(1,3):
+        print (str(i))
         time.sleep(1)
         driver.find_element_by_xpath("//div[@id='sidebar']/ul/li["+str(i)+"]/a").click()
         time.sleep(3)
 # Taking screenshot
         myScreenshot = pyautogui.screenshot()
-        myScreenshot.save(r'E:/Python Neha workspace/Screenshot/Screenshot'+str(i)+'.png')
-# # To create pdf file
-#         from fpdf import FPDF
-#         pdf = FPDF()
-#         pdf.add_page()
-#         pdf.set_font('Arial', 14)
-#         pdf.cell(200, 10,'Welcome to PythonGuides')
-#         pdf.output('python.pdf')
+        myScreenshot.save(r'C:/Neha/MyProject/Screenshots/Screenshot'+str(i)+'.png')
 
-#To click on sub modules incorporated by main modules
-        try:
-            driver.find_element_by_xpath("//div[@id='sidebar']/ul/li[" + str(i) + "]/span").click()
-        except Exception:
-            try:
-                driver.find_element_by_xpath("//*[@id='sub-menu']/ul/ul["+j+"]").click()
-                time.sleep(3)
-            except Exception:
-                print("Sub module found" )
-        j=j+1
+# To create pdf file
+        #from fpdf import FPDF
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font('Arial','', 14)
+    #pdf.cell(200, 10,'')
+    pdf.cell(73)
+    pdf.cell(70, 10, ' Welcome to PythonGuides ', 1, 1, 'B')
+    pdf.output('python.pdf', 'F')
+
+        # pdf = FPDF()
+        # pdf.add_page()
+        # pdf.set_font('Arial', 'B', 16)
+        # pdf.cell(40, 10, 'Hello World!')
+        # pdf.output('tuto1.pdf', 'F')
+
+# #To click on sub modules incorporated by main modules
+#         try:
+#             driver.find_element_by_xpath("//div[@id='sidebar']/ul/li[" + str(i) + "]/span").click()
+#         except Exception:
+#             try:
+#                 driver.find_element_by_xpath("//*[@id='sub-menu']/ul/ul["+j+"]").click()
+#                 time.sleep(3)
+#             except Exception:
+#                 print("Sub module found" )
+#         j=j+1
 print("Done")
 #
 # # Creating a new lead
